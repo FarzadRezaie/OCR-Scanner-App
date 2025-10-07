@@ -11,6 +11,7 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from fastapi import Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI
 # -----------------------------
 # MongoDB Atlas connection
 # -----------------------------
@@ -107,6 +108,11 @@ def require_admin(current_user: dict = Depends(get_current_user)):
 # -----------------------------
 # Routes
 # -----------------------------
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"status": "ok"}
 @app.get("/")
 def root():
     return {"message": "FastAPI server is running!"}
